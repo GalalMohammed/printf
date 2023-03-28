@@ -37,7 +37,7 @@ char *_strdup(char *str)
 
 /**
  * rot13 - Encodes a string using rot13.
- * @s: The string to be encoded.
+ * @str: The string to be encoded.
  *
  * Return: A pointer to the encoded string.
  */
@@ -93,6 +93,8 @@ char *toUpper(char *str)
 /**
  * _strrev - Reverses a string.
  * @str: The string to be reversed.
+ *
+ * Return: pointer to reversed string
  */
 
 char *_strrev(char *str)

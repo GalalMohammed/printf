@@ -8,7 +8,7 @@
  * Return: count
  */
 int printstr(char *str, char *(*f)(char *))
-{	
+{
 	int count = 0, i = 0;
 	char *strCp = _strdup(str);
 
