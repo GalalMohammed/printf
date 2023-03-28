@@ -29,7 +29,7 @@ int print_int(int arg, char *tmp)
   * Return: count
   */
 
-int print_binary(int arg, char *tmp)
+int print_binary(long int arg, char *tmp)
 {
 	int count = 0;
 	char *strout = my_itoa(arg, tmp, 2);

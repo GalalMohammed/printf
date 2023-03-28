@@ -32,9 +32,10 @@ void _strrev(char *str)
  * Return: A pointer to the output string.
  */
 
-char *my_itoa(int i, char *strout, int base)
+char *my_itoa(long int i, char *strout, int base)
 {
 	int digit, sign = 0, j = 0;
+	unsigned long num = i;
 
 	if (i == 0)
 	{
@@ -46,17 +47,14 @@ char *my_itoa(int i, char *strout, int base)
 	if (i < 0)
 	{
 		sign = 1;
+		num = -i;
 	}
 
-	while (i != 0)
+	while (num != 0)
 	{
-		digit = i % base;
-		if (sign)
-		{
-			digit = -digit;
-		}
+		digit = num % base;
 		strout[j++] = (digit > 9) ? ('a' + digit - 10) : ('0' + digit);
-		i = i / base;
+		num = num / base;
 	}
 
 	if (sign == 1)

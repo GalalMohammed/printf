@@ -6,9 +6,9 @@
 
 int _putchar(char c);
 void _strrev(char *str);
-char *my_itoa(int i, char *strout, int base);
+char *my_itoa(long int i, char *strout, int base);
 int print_int(int arg, char *tmp);
-int print_binary(int arg, char *tmp);
+int print_binary(long int arg, char *tmp);
 int printstr(char *str);
 int _printf(const char *format, ...);
 

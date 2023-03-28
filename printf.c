@@ -39,7 +39,7 @@ int handle_char_str_percent(char format, va_list arg)
  */
 
 
-int numbers_switcher(char format, int num, char *tmp)
+int numbers_switcher(char format, long int num, char *tmp)
 {
 	int count = 0;
 
@@ -87,8 +87,10 @@ int _printf(const char *format, ...)
 			break;
 			case 'i':
 			case 'd':
-			case 'b':
 			count += numbers_switcher(format[i], va_arg(arg, int), tmp);
+			break;
+			case 'b':
+			count += numbers_switcher(format[i], va_arg(arg, unsigned int), tmp);
 			break;
 			default:
 			_putchar('%'),	_putchar(format[i]), count += 2;
