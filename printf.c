@@ -1,6 +1,35 @@
 #include <stdio.h>
 #include "main.h"
 /**
+ * handle_char_str_percent - determine which print function to use
+ * @format: the character that identifies the type of the variable to print
+ * @arg: A list of variadic arguments
+ *
+ * Return: count
+ */
+
+int handle_char_str_percent(char format, va_list arg)
+{
+	int count = 0;
+
+	switch (format)
+	{
+	case 'c':
+	_putchar(va_arg(arg, int));
+	count++;
+	break;
+	case '%':
+	_putchar('%');
+	count++;
+	break;
+	case 's':
+	count += printstr(va_arg(arg, char *));
+	break;
+	}
+	return (count);
+}
+
+/**
  * numbers_switcher - determine which print function to use to print numbers
  * @format: the character that identifies the type of the variable to print
  * @num: the number
@@ -19,6 +48,10 @@ int numbers_switcher(char format, int num, char *tmp)
 	case 'd':
 	case 'i':
 	count += print_int(num, tmp);
+	break;
+	case 'b':
+	count += print_binary(num, tmp);
+	break;
 	}
 	return (count);
 }
@@ -48,16 +81,13 @@ int _printf(const char *format, ...)
 			case '\0':
 			return (-1);
 			case 'c':
-			_putchar(va_arg(arg, int)), count++;
-			break;
 			case '%':
-			_putchar('%'), count++;
-			break;
 			case 's':
-			count += printstr(va_arg(arg, char *));
+			count += handle_char_str_percent(format[i], arg);
 			break;
 			case 'i':
 			case 'd':
+			case 'b':
 			count += numbers_switcher(format[i], va_arg(arg, int), tmp);
 			break;
 			default:
