@@ -43,7 +43,7 @@ char *my_itoa(int i, char *strout, int base)
 		return (strout);
 	}
 
-	if (i < 0 && base == 10)
+	if (i < 0)
 	{
 		sign = 1;
 	}
