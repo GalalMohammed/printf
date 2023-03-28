@@ -46,12 +46,15 @@ char *my_itoa(int i, char *strout, int base)
 	if (i < 0 && base == 10)
 	{
 		sign = 1;
-		i *= -1;
 	}
 
 	while (i != 0)
 	{
 		digit = i % base;
+		if (sign)
+		{
+			digit = -digit;
+		}
 		strout[j++] = (digit > 9) ? ('a' + digit - 10) : ('0' + digit);
 		i = i / base;
 	}
