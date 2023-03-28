@@ -1,6 +1,72 @@
 #include "main.h"
 
 /**
+  * _strdup - Duplicate a string
+  * @str: the string to duplicate
+  *
+  * Return: the string duplicated
+  */
+char *_strdup(char *str)
+{
+	int a = 0, i = 1;
+	char *s;
+
+	if (str == NULL)
+		return (NULL);
+
+	while (str[i])
+	{
+		i++;
+	}
+
+	s = malloc((sizeof(char) * i) + 1);
+
+	if (s == NULL)
+		return (NULL);
+
+	while (a < i)
+	{
+		s[a] = str[a];
+		a++;
+	}
+
+	s[a] = '\0';
+	return (s);
+}
+
+
+/**
+ * rot13 - Encodes a string using rot13.
+ * @s: The string to be encoded.
+ *
+ * Return: A pointer to the encoded string.
+ */
+char *rot13(char *str)
+{
+	int a = 0;
+	char *s = str;
+
+	while (s[a])
+	{
+		while ((s[a] >= 'a' && s[a] <= 'z') || (s[a] >= 'A' && s[a] <= 'Z'))
+		{
+			if ((s[a] > 'm' && s[a] <= 'z') || (s[a] > 'M' && s[a] <= 'Z'))
+			{
+				s[a] -= 13;
+				break;
+			}
+
+			s[a] += 13;
+			break;
+		}
+
+		a++;
+	}
+
+	return (str);
+}
+
+/**
  * toUpper - Changes all lowercase letters
  *                  of a string to uppercase.
  * @str: The string to be changed.
@@ -29,7 +95,7 @@ char *toUpper(char *str)
  * @str: The string to be reversed.
  */
 
-void _strrev(char *str)
+char *_strrev(char *str)
 {
 	int i,	j = 0;
 	char temp;
@@ -45,6 +111,7 @@ void _strrev(char *str)
 		str[i] = str[j - i - 1];
 		str[j - i - 1] = temp;
 	}
+	return (str);
 }
 
 /**

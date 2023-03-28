@@ -23,8 +23,10 @@ int handle_char_str_percent(char format, va_list arg)
 	count++;
 	break;
 	case 's':
-	count += printstr(va_arg(arg, char *));
+	count += printstr(va_arg(arg, char *), NULL);
 	break;
+	case 'R':
+	count += printstr(va_arg(arg, char *), rot13);
 	}
 	return (count);
 }
@@ -90,7 +92,8 @@ int _printf(const char *format, ...)
 			i++;
 			if (format[i] == '\0')
 				return (-1);
-			else if (format[i] == 'c' || format[i] == '%' || format[i] == 's')
+			else if (format[i] == 'c' || format[i] == '%' || format[i] == 's'
+					|| format[i] == 'R')
 				count += handle_char_str_percent(format[i], arg);
 			else if (format[i] == 'i' || format[i] == 'd')
 				count += numbers_switcher(format[i], va_arg(arg, int), tmp);
