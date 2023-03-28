@@ -52,6 +52,17 @@ int numbers_switcher(char format, long int num, char *tmp)
 	case 'b':
 	count += print_binary(num, tmp);
 	break;
+	case 'u':
+	count += print_unsignedInt(num, tmp);
+	break;
+	case 'o':
+	count += print_octal(num, tmp);
+	break;
+	case 'x':
+	count += print_hex(num, tmp, LOWER);
+	break;
+	case 'X':
+	count += print_hex(num, tmp, UPPER);
 	}
 	return (count);
 }
@@ -76,26 +87,19 @@ int _printf(const char *format, ...)
 	{
 		if (format[i] == '%')
 		{
-			switch (format[++i])
-			{
-			case '\0':
-			return (-1);
-			case 'c':
-			case '%':
-			case 's':
-			count += handle_char_str_percent(format[i], arg);
-			break;
-			case 'i':
-			case 'd':
-			count += numbers_switcher(format[i], va_arg(arg, int), tmp);
-			break;
-			case 'b':
-			count += numbers_switcher(format[i], va_arg(arg, unsigned int), tmp);
-			break;
-			default:
-			_putchar('%'),	_putchar(format[i]), count += 2;
-			break;
-			}
+			i++;
+			if (format[i] == '\0')
+				return (-1);
+			else if (format[i] == 'c' || format[i] == '%' || format[i] == 's')
+				count += handle_char_str_percent(format[i], arg);
+			else if (format[i] == 'i' || format[i] == 'd')
+				count += numbers_switcher(format[i], va_arg(arg, int), tmp);
+			else if (format[i] == 'b' || format[i] == 'u'
+					|| format[i] == 'o' || format[i] == 'x'
+					|| format[i] == 'X')
+				count += numbers_switcher(format[i], va_arg(arg, unsigned int), tmp);
+			else
+				_putchar('%'),  _putchar(format[i]), count += 2;
 		}
 		else
 			_putchar(format[i]), count++;

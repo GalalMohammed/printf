@@ -1,6 +1,30 @@
 #include "main.h"
 
 /**
+ * toUpper - Changes all lowercase letters
+ *                  of a string to uppercase.
+ * @str: The string to be changed.
+ *
+ * Return: A pointer to the changed string.
+ */
+
+char *toUpper(char *str)
+{
+	int i = 0;
+	char *s = str;
+
+	while (s[i])
+	{
+		if (s[i] >= 'a' && s[i] <= 'z')
+		{
+			s[i] = s[i] - 32;
+		}
+		i++;
+	}
+	return (str);
+}
+
+/**
  * _strrev - Reverses a string.
  * @str: The string to be reversed.
  */
